@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+String getHostIcon(String url) {
+  final Uri uri = Uri.parse(url);
+  String host = uri.host;
+  if (host.contains('example.com')) {
+    host = 'perplexity.com';
+  }
+  return "https://www.google.com/s2/favicons?domain=${host}&sz=64";
+}
 class NewsScreen extends StatelessWidget {
   const NewsScreen({super.key});
 
@@ -12,7 +20,6 @@ class NewsScreen extends StatelessWidget {
       {'name': 'Fuente 3', 'url': 'https://example.com/fuente3'},
       {'name': 'Fuente 4', 'url': 'https://example.com/fuente4'},
     ];
-
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -44,7 +51,7 @@ class NewsScreen extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    childAspectRatio: 3.5, // Más ancho que alto (ajustado para cuadros más pequeños)
+                    childAspectRatio: 2.5,
                     crossAxisSpacing: 8,
                     mainAxisSpacing: 8,
                   ),
@@ -63,6 +70,7 @@ class NewsScreen extends StatelessWidget {
                         }
                       },
                       style: ElevatedButton.styleFrom(
+                        elevation: 0,
                         padding: const EdgeInsets.all(4), // Reducido para cuadros más compactos
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4), // Esquinas ligeramente redondeadas
@@ -72,10 +80,19 @@ class NewsScreen extends StatelessWidget {
                         children: [
                           Align(
                             alignment: Alignment.center,
-                            child: Text(
-                              source['name']!,
-                              style: const TextStyle(fontSize: 12), // Texto más pequeño
-                              textAlign: TextAlign.center,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Image.network(
+                                  getHostIcon(source['url']!),
+                                  width: 32, // Icono más pequeño
+                                  height: 32, // Icono más pequeño
+                                ),
+                                Text(
+                                  source['name']!,
+                                  style: const TextStyle(fontSize: 12), // Texto más pequeño
+                                ),
+                              ],
                             ),
                           ),
                           const Positioned(
@@ -83,7 +100,6 @@ class NewsScreen extends StatelessWidget {
                             top: 4,
                             child: Icon(
                               Icons.arrow_outward,
-                              size: 12, // Icono más pequeño
                             ),
                           ),
                         ],

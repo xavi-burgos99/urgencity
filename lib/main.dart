@@ -28,6 +28,11 @@ class MyApp extends StatelessWidget {
         cardTheme: const CardTheme(
           elevation: 0,
         ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            elevation: WidgetStateProperty.all(0),
+          ),
+        ),
       ),
       home: const MainScreen(),
     );
