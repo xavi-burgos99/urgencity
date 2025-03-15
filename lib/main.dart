@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
+import 'noticia_screen.dart';
 import 'map_screen.dart';
 
 void main() {
@@ -32,9 +33,11 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
+  // Lista de pantallas para la navegación
   static const List<Widget> _screens = [
-    HomeScreen(),
-    MapScreen(),
+    HomeScreen(),  // Pantalla de Inicio
+    NewsScreen(),  // Pantalla de Noticias
+    MapScreen(),   // Pantalla del Mapa
   ];
 
   void _onItemTapped(int index) {
@@ -46,7 +49,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _screens[_selectedIndex],
+      body: _screens[_selectedIndex], // Muestra la pantalla seleccionada
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
@@ -54,6 +57,10 @@ class _MainScreenState extends State<MainScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.article),
+            label: 'News',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.map),
