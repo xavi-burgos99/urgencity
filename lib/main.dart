@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'home_screen.dart';
 import 'noticia_screen.dart';
 import 'map_screen.dart';
+import 'dart:ui'; // Necesario para el efecto de desenfoque
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +32,16 @@ class MyApp extends StatelessWidget {
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
             elevation: WidgetStateProperty.all(0),
+          ),
+        ),
+        segmentedButtonTheme: SegmentedButtonThemeData(
+          style: SegmentedButton.styleFrom(
+            side: BorderSide(color: Colors.transparent, width: 0),
+            backgroundColor: Colors.teal.shade50,
+            selectedBackgroundColor: Colors.teal,
+            foregroundColor: Colors.teal,
+            selectedForegroundColor: Colors.white,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
           ),
         ),
       ),

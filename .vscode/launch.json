@@ -1,0 +1,35 @@
+{
+    // Use IntelliSense para saber los atributos posibles.
+    // Mantenga el puntero para ver las descripciones de los existentes atributos.
+    // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "urgencity",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "urgencity (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "urgencity (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "Flutter",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "args": [
+                "--dart-define",
+                "ACCESS_TOKEN=sk.eyJ1Ijoic2FteWEtdWFiIiwiYSI6ImNtOGI4bDU2NzBudDMya3NoMG04bjc2MDAifQ.BHMK3rLdqzfuh4SVugvXBA"
+            ],
+        }
+    ]
+}
