@@ -226,12 +226,12 @@ class _MapScreenState extends State<MapScreen> {
                     segments: const [
                       ButtonSegment<UrgencyType>(
                         value: UrgencyType.general,
-                        label: Text('Urgencias Generales'),
+                        label: Text('Generales'),
                         icon: Icon(Icons.local_hospital),
                       ),
                       ButtonSegment<UrgencyType>(
                         value: UrgencyType.pediatric,
-                        label: Text('Urgencias Pediátricas'),
+                        label: Text('Pediátricas'),
                         icon: Icon(Icons.child_friendly),
                       ),
                     ],

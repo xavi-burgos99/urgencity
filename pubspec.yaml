@@ -31,7 +31,6 @@ dependencies:
   flutter:
     sdk: flutter
   url_launcher: ^6.1.7
-  mapbox_maps_flutter: ^2.0.0
   http: ^0.13.4
   html: ^0.15.0
 
