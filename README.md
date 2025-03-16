@@ -22,5 +22,12 @@ Con este boceto como base, decidimos realizar una pequeña simulación de cómo 
 
 ![foto1](https://github.com/user-attachments/assets/1df19a11-c9c6-4676-96af-fbdd1b4b7565)
 
+![foto2](https://github.com/user-attachments/assets/7f1bc0f8-b550-429b-975c-458e8a45a9c3)
 
+![foto3](https://github.com/user-attachments/assets/806d6647-d3c4-4a3f-8e90-793034a98bfc)
 
+![foto4](https://github.com/user-attachments/assets/6fbe6456-490d-4ff3-9052-13e40ebd232e)
+
+![foto5](https://github.com/user-attachments/assets/508ba320-7cfd-4392-8ef9-4ef6c86fe494)
+
+![foto6](https://github.com/user-attachments/assets/14ad6f30-78b9-4f8b-b951-687b1687cc94)
