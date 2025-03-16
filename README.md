@@ -20,7 +20,7 @@ Para lograr una primera versión de nuestra idea, creamos un boceto de lo que qu
 ## Prototipo con Flutter
 Con este boceto como base, decidimos realizar una pequeña simulación de cómo se vería esta aplicación utilizando Flutter. Implementamos una API de Perplexity para explorar cómo integrar la IA con nuestra propuesta de ayuda médica a LATAM.
 
-![foto1](/Descargas/foto1.png)
+![foto1](https://github.com/user-attachments/assets/1df19a11-c9c6-4676-96af-fbdd1b4b7565)
 
 
 
