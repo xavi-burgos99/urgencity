@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'home_screen.dart';
-import 'noticia_screen.dart';
+import 'news_screen.dart';
 import 'map_screen.dart';
 import 'dart:ui'; // Necesario para el efecto de desenfoque
 
@@ -63,7 +63,6 @@ class _MainScreenState extends State<MainScreen> {
   // Lista de pantallas para la navegación
   static const List<Widget> _screens = [
     HomeScreen(),  // Pantalla de Inicio
-    NewsScreen(),  // Pantalla de Noticias
     MapScreen(),   // Pantalla del Mapa
   ];
 
@@ -84,10 +83,6 @@ class _MainScreenState extends State<MainScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.article),
-            label: 'News',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.map),
