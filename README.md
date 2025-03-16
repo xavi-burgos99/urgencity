@@ -1,16 +1,20 @@
-# urgencity
+#UrgenCity
+UrgenCity es una app creada para el reto de Pay Retailers de UAB The Hack! con el fin de encontrar una posible solución/ayuda a LATAM con implementación de la IA.
 
-A new Flutter project.
+##Propuesta
+###Control de aforo y flujo de pacientes
+- Monitoreo en tiempo real de la ocupación hospitalaria para evitar congestión y optimizar la distribución de recursos.
 
-## Getting Started
+###Información diaria sobre la salud pública
+- Alertas de epidemias: Noticias y recursos sobre brotes de enfermedades.
+- Análisis con Perplexity AI: Actualización diaria sobre temas de salud y otros ámbitos relevantes.
+- Tendencias de búsqueda en salud: Identificación de las consultas más frecuentes para proporcionar datos relevantes.
+- Soporte en zonas rurales: Uso de geolocalización para recomendar centros de atención cercanos o proporcionar un número de asistencia como el 061 en caso de no haber un CAP disponible.
 
-This project is a starting point for a Flutter application.
+###Objetivo
+Mejorar la gestión hospitalaria y el acceso a información sanitaria en tiempo real, especialmente en zonas con menor cobertura médica.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Para lograr una primera versión de nuestra idea, hicimos un bozeto de que queríamos lograr y como queríamos que se mostrara nuestra propuesta. Solamente nos hemos centrado en el control de aforo para este pequeño sketch.
+Después con este sketch como base hemos decidido realizar una pequeña simulación de como se vería esta app con flutter, implementando una API de Perplexity para ver como se implementa la IA con nuestra propuesta de ayuda médica a LATAM.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
