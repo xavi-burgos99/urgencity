@@ -4,7 +4,6 @@ import 'data.dart';
 import 'keys.dart';
 
 Future<List<NewsItem>> fetchNewsItems(String trendingLabel, {bool forceAlert = false}) async {
-  //final int numQueries = Random().nextInt(3) + 1;
   const int numQueries = 1;
   List<NewsItem> allItems = [];
   for (int i = 0; i < numQueries; i++) {
@@ -57,31 +56,33 @@ Future<List<NewsItem>> _fetchNewsItemsOnce(String trendingLabel, {bool forceAler
     // Extrae el contenido del mensaje del asistente
     String assistantMessage = data['choices'][0]['message']['content'];
 
-    // Comprobar si el mensaje empieza con un JSON
-    if (!assistantMessage.startsWith('{')) {
-      // Si no empieza con un JSON, intenta buscar uno en el mensaje
-      final int jsonStart = assistantMessage.indexOf('{');
-      if (jsonStart != -1) {
-        assistantMessage = assistantMessage.substring(jsonStart);
-      }
-    }
+    assistantMessage = assistantMessage
+      .replaceAll("\r", "") // Eliminar retornos de carro
+      .replaceAllMapped(RegExp(r'[\x00-\x1F]'), (match) => ''); // Eliminar caracteres de control
 
-    // Comprobar si el mensaje termina con un JSON
-    if (!assistantMessage.endsWith('}')) {
-      // Si no termina con un JSON, intenta buscar uno en el mensaje
-      final int jsonEnd = assistantMessage.lastIndexOf('}');
-      if (jsonEnd != -1) {
-        assistantMessage = assistantMessage.substring(0, jsonEnd + 1);
-      }
+    // Usar una expresión regular para extraer el primer bloque JSON encontrado
+    final RegExp regex = RegExp(r'\{[\S\s]*?\}');
+    final match = regex.firstMatch(assistantMessage);
+    if (match != null) {
+      assistantMessage = match.group(0)!;
+    } else {
+      print('No se encontró un JSON válido en la respuesta');
+      return [];
     }
 
     // Intenta parsear el JSON de la respuesta
     try {
       final Map<String, dynamic> newsData = jsonDecode(assistantMessage);
 
-      final String title = newsData['title'] ?? 'Sin título';
-      final String description = newsData['description'] ?? '';
-      final String content = newsData['content'] ?? '';
+      if (!newsData.containsKey('title') || !newsData.containsKey('description') ||
+          !newsData.containsKey('content') || !newsData.containsKey('type')) {
+        print('JSON recibido no tiene los campos requeridos');
+        return [];
+      }
+
+      final String title = newsData['title']?.toString() ?? 'Sin título';
+      final String description = newsData['description']?.toString() ?? '';
+      final String content = newsData['content']?.toString() ?? '';
       final String type = newsData['type']?.toString().toLowerCase() ?? 'news';
       final List<String> references = (newsData['references'] as List<dynamic>?)
           ?.map((e) => e.toString())
@@ -106,13 +107,10 @@ Future<List<NewsItem>> _fetchNewsItemsOnce(String trendingLabel, {bool forceAler
       print('Error al parsear JSON: $e');
       print('Respuesta recibida: $assistantMessage');
 
-      final String title = 'Información sobre $trendingLabel';
-      final String description = 'Información generada sobre el tema de tendencia';
-
       return [NewsItem(
-        title: title,
-        description: description,
-        content: assistantMessage,
+        title: 'Error en la generación de noticias',
+        description: 'No se pudo procesar correctamente la información sobre $trendingLabel.',
+        content: 'Se produjo un error al recuperar la noticia.',
         references: [],
       )];
     }

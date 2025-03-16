@@ -28,9 +28,16 @@ class Data {
   static final List<NewsItem> news = [];
 
   static final List<CityItem> cities = [
-    CityItem(name: 'Barcelona', zipCode: '08001'),
-    CityItem(name: 'Madrid', zipCode: '28001'),
-    CityItem(name: 'Valencia', zipCode: '46001'),
+    CityItem(name: 'Ciudad de México', zipCode: '01000'), // México
+    CityItem(name: 'Buenos Aires', zipCode: 'C1000'), // Argentina
+    CityItem(name: 'Bogotá', zipCode: '110111'), // Colombia
+    CityItem(name: 'Lima', zipCode: '15001'), // Perú
+    CityItem(name: 'Santiago', zipCode: '8320000'), // Chile
+    CityItem(name: 'Caracas', zipCode: '1010'), // Venezuela
+    CityItem(name: 'Quito', zipCode: '170150'), // Ecuador
+    CityItem(name: 'La Paz', zipCode: '0101'), // Bolivia
+    CityItem(name: 'San José', zipCode: '10101'), // Costa Rica
+    CityItem(name: 'Asunción', zipCode: '1209'), // Paraguay
   ];
 
   static List<TrendingSearchItem> fullTrendingSearches = [
@@ -86,12 +93,10 @@ class Data {
     TrendingSearchItem(label: "Calma interior")
   ];
 
-  static List<TrendingSearchItem> _trendingSearches = [];
-  static List<TrendingSearchItem> get trendingSearches {
-    if (_trendingSearches.isEmpty) {
-      _trendingSearches = fullTrendingSearches..shuffle();
-      _trendingSearches = _trendingSearches.sublist(0, 3);
-    }
-    return _trendingSearches;
+  static List<TrendingSearchItem> trendingSearches = [];
+
+  static randomizeTrendingSearches() {
+    List<TrendingSearchItem> trendingSearchesList = fullTrendingSearches..shuffle();
+    trendingSearches = trendingSearchesList.sublist(0, 3);
   }
 }

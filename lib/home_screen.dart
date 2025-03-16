@@ -13,6 +13,13 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   bool isSearching = false;
+  String zipCode = Data.cities.first.zipCode;
+
+  @override
+  void initState() {
+    super.initState();
+    Data.randomizeTrendingSearches();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,33 +31,31 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: StatefulBuilder(
-              builder: (BuildContext context, StateSetter setState) {
-                String? selectedCity = Data.cities.first.zipCode;
-                return DropdownButton<String>(
-                  value: selectedCity,
-                  items: Data.cities.map((city) {
-                    return DropdownMenuItem<String>(
-                      value: city.zipCode,
-                      child: Text(city.name),
-                    );
-                  }).toList(),
-                  onChanged: (String? newValue) {
-                    if (newValue != null) {
-                      setState(() {
-                        selectedCity = newValue;
-                      });
-                    }
-                  },
-                  underline: const SizedBox(),
-                  elevation: 0,
-                  borderRadius: BorderRadius.circular(10),
-                  dropdownColor: Colors.teal[50],
+            child: DropdownButton<String>(
+              value: zipCode,
+              items: Data.cities.map((city) {
+                return DropdownMenuItem<String>(
+                  value: city.zipCode,
+                  child: Text(city.name),
                 );
+              }).toList(),
+              onChanged: (String? newValue) {
+                if (newValue != null) {
+                  setState(() {
+                    zipCode = newValue;
+                    Data.randomizeTrendingSearches();
+                    Data.news.clear();
+                  });
+                }
               },
+              underline: const SizedBox(),
+              elevation: 0,
+              borderRadius: BorderRadius.circular(10),
+              dropdownColor: Colors.teal[50],
             ),
           ),
         ],
+
       ),
       body: ListView(
         children: [
@@ -90,6 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ...[
                     const SizedBox(height: 50),
                     const Center(child: CircularProgressIndicator()),
+                    const SizedBox(height: 25),
                   ],
                 if (!isSearching)
                   Column(
@@ -117,28 +123,28 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ],
                         ),
-                      if (Data.news.isNotEmpty)
-                        ...Data.news.map((article) => Card(
-                          child: ListTile(
-                            title: Text(article.title),
-                            subtitle: article.type == 'alert' ? null : Text(article.description),
-                            tileColor: article.type == 'alert' ? Colors.red[50] : null,
-                            leading: article.type == 'alert' ? const Icon(Icons.warning, color: Colors.red) : null,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => NewsScreen(article: article),
-                                ),
-                              );
-                            },
-                          ),
-                        )),
                     ],
                 ),
+                if (Data.news.isNotEmpty)
+                  ...Data.news.map((article) => Card(
+                    child: ListTile(
+                      title: Text(article.title),
+                      subtitle: article.type == 'alert' ? null : Text(article.description),
+                      tileColor: article.type == 'alert' ? Colors.red[50] : null,
+                      leading: article.type == 'alert' ? const Icon(Icons.warning, color: Colors.red) : null,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => NewsScreen(article: article),
+                          ),
+                        );
+                      },
+                    ),
+                  )),
               ],
             ),
           ),

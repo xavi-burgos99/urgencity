@@ -121,13 +121,17 @@ class _MapScreenState extends State<MapScreen> {
     } else {
       _filteredHospitals = HospitalInfo.allHospitals.where((hospital) {
         return hospital.hospitalName.toLowerCase().contains(_searchText.toLowerCase()) ||
-              hospital.address.toLowerCase().contains(_searchText.toLowerCase());
+               hospital.address.toLowerCase().contains(_searchText.toLowerCase());
       }).toList();
       _isSearching = true;
-      
-      // Vuelve a solicitar el foco después de actualizar el estado
-      _searchFocusNode.requestFocus();
     }
+
+    // Asegurar que el foco se mantiene en el campo de búsqueda
+    Future.delayed(Duration(milliseconds: 100), () {
+      if (mounted) {
+        _searchFocusNode.requestFocus();
+      }
+    });
   }
 
   @override
@@ -146,15 +150,14 @@ class _MapScreenState extends State<MapScreen> {
           ),
           
           // 2. Efecto de desenfoque cuando está buscando
-          if (_isSearching)
-            BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10), // Ajusta según necesites
-              child: Container(
-                width: double.infinity,
-                height: double.infinity,
-                color: Colors.white.withOpacity(0.2), // Oscurece ligeramente
-              ),
+          BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: _isSearching ? 10 : 0, sigmaY: _isSearching ? 10 : 0),
+            child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: Colors.white.withOpacity(0.2), // Oscurece ligeramente
             ),
+          ),
           // Barra de búsqueda en la parte superior
           Positioned(
             top: 50,
@@ -192,10 +195,6 @@ class _MapScreenState extends State<MapScreen> {
                     border: InputBorder.none,
                     contentPadding: const EdgeInsets.symmetric(vertical: 15),
                   ),
-                  onSubmitted: (value) {
-                    // Cerrar teclado al presionar Enter
-                    FocusScope.of(context).unfocus();
-                  },
                 ),
               ),
             ),
